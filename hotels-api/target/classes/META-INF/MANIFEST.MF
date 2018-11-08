@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: API for hotels search with Rate Limit
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: tathagat
+Implementation-Vendor-Id: com.agoda.hotels
+Build-Jdk: 1.8.0_131
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/hotels-api
+Created-By: Maven Integration for Eclipse
+
