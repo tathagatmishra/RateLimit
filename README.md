@@ -25,16 +25,16 @@ RateLimitCache : Cache having key as apiKey and value as a TreeSet of timestamps
 
 BlockedApiKeysCache : Cache having key as ApiKey and value as the timestamp when apiKey was blocked for exceeding rate limit.
 
-On each access by a apiKey, it is checked if it is present in BlockedApiKeysCache.
+1) On each access by a apiKey, it is checked if it is present in BlockedApiKeysCache.
 
-If there is any entry, corresponding timestamp value is checked to ensure if timestamp value is with in previous 5 minutes.
+2) If there is any entry, corresponding timestamp value is checked to ensure if timestamp value is with in previous 5 minutes.
 
-If value is with in 5 minutes, apiKey is restricted with HttpStatus.TOO_MANY_REQUESTS response.
+3) If value is with in 5 minutes, apiKey is restricted with HttpStatus.TOO_MANY_REQUESTS response.
 
-4 ) If value is more than 5 minutes old, apKey is removed from RateLimitCache and apiKey proceeds with further checks.
+4) If value is more than 5 minutes old, apKey is removed from RateLimitCache and apiKey proceeds with further checks.
 
-Proceeding further it is checked if there are timestamps stored in RateLimitCache that are more than 10 seconds w.r.t to current timestamp. All such instances are removed.
+5) Proceeding further it is checked if there are timestamps stored in RateLimitCache that are more than 10 seconds w.r.t to current timestamp. All such instances are removed.
 
-Then it is checked, if inserting current timestamp will exceed the timelimit. If it exceeds, apiKey is blocked by adding its entry in BlockedApiKeysCache and HttpStatus.TOO_MANY_REQUESTS is sent.
+6) Then it is checked, if inserting current timestamp will exceed the timelimit. If it exceeds, apiKey is blocked by adding its entry in BlockedApiKeysCache and HttpStatus.TOO_MANY_REQUESTS is sent.
 
-If limit is not reached, access is granted and entry is made in RateLimitCache.
+7) If limit is not reached, access is granted and entry is made in RateLimitCache.
